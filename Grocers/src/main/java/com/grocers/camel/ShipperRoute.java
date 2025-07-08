@@ -12,7 +12,7 @@ public class ShipperRoute extends RouteBuilder {
         from("seda:shipping")
             .log("📦 Received shipping request: ${body}")
             .marshal().json(JsonLibrary.Jackson) // Convert to JSON
-            .setHeader(Sqs2Constants.OPERATION, constant("sendMessage")) // AWS SQS operation
+            .setHeader(Sqs2Constants.SQS_OPERATION, constant("sendMessage")) // AWS SQS operation
             .to("aws2-sqs://{{aws.sqs.queue}}"
                 + "?accessKey={{aws.accessKey}}"
                 + "&secretKey=RAW({{aws.secretKey}})"

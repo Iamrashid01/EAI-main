@@ -1,8 +1,14 @@
-from("direct:supplierRouting")
-    .process(exchange -> {
-        Order order = exchange.getIn().getBody(Order.class);
-        String supplierType = order.getProductType() + "Adapter";
-        exchange.getIn().setHeader("supplierAdapter", supplierType);
-    })
-    .recipientList(header("supplierAdapter"))
-    .log("Routed to ${header.supplierAdapter}");
+package com.grocers.camel;
+
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RetailerRoute extends RouteBuilder {
+    @Override
+    public void configure() throws Exception {
+        from("seda:retailer")
+            .log("🏪 Retailer processing order: ${body}")
+            .toD("seda:${body.format}-supplier");
+    }
+}

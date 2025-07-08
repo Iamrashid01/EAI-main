@@ -1,0 +1,10 @@
+com\grocers\camel\ShipperRoute.class
+com\grocers\GrocersApplication.class
+com\grocers\api\OrderController.class
+com\grocers\SupplierAdapter.class
+com\grocers\camel\GlobalRouteConfig.class
+com\grocers\camel\CustomerRoute.class
+com\grocers\camel\RetailerRoute.class
+com\grocers\domain\Order.class
+com\grocers\adapters\JsonSupplierAdapter.class
+com\grocers\adapters\XmlSupplierAdapter.class

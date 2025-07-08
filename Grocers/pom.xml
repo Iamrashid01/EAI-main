@@ -1,22 +1,116 @@
-<dependencies>
-    <!-- AWS Integration -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.grocers</groupId>
+  <artifactId>grocers-app</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>Grocers Application</name>
+  <description>Spring Boot + Apache Camel + AWS SQS + JMS Integration</description>
+
+  <properties>
+    <java.version>21</java.version>
+    <spring.boot.version>3.2.5</spring.boot.version>
+    <camel.version>4.4.0</camel.version>
+  </properties>
+
+  <dependencies>
+    <!-- Spring Boot Core -->
     <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-sqs</artifactId>
-        <version>3.20.0</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+      <version>${spring.boot.version}</version>
     </dependency>
-    
-    <!-- JSON Processing -->
+
+    <!-- Spring Boot Web (for REST APIs) -->
     <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-jackson</artifactId>
-        <version>3.20.0</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring.boot.version}</version>
     </dependency>
-    
-    <!-- XML Security -->
+
+    <!-- Apache Camel Spring Boot Starter -->
     <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-xmlsecurity</artifactId>
-        <version>3.20.0</version>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-spring-boot-starter</artifactId>
+      <version>${camel.version}</version>
     </dependency>
-</dependencies>
+
+    <!-- Apache Camel Core -->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-core-starter</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
+    <!-- Apache Camel Support (for MemoryIdempotentRepository) -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-support</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
+    <!-- Apache Camel AWS SQS -->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-aws2-sqs-starter</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
+    <!-- Apache Camel JMS -->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-jms-starter</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
+    <!-- Apache Camel Jackson (for .marshal().json(JsonLibrary.Jackson)) -->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-jackson-starter</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
+    <!-- Jackson Core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.17.1</version>
+    </dependency>
+
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Compiler Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Spring Boot Plugin -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.boot.version}</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
