@@ -10,14 +10,17 @@ public class ShipperRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("seda:shipping")
+            .routeId("shipper-sqs-route")
             .log("📦 Received shipping request: ${body}")
-            .marshal().json(JsonLibrary.Jackson) // Convert to JSON
+            .marshal().json(JsonLibrary.Jackson) // Convert POJO to JSON
             .setHeader(Sqs2Constants.SQS_OPERATION, constant("sendMessage")) // AWS SQS operation
             .to("aws2-sqs://{{aws.sqs.queue}}"
                 + "?accessKey={{aws.accessKey}}"
                 + "&secretKey=RAW({{aws.secretKey}})"
                 + "&region={{aws.region}}"
-                + "&autoCreateQueue=true")
-            .log("Order shipped via SQS. Message ID: ${header.CamelAwsSqsMessageId}");
+                + "&autoCreateQueue=true"
+                + "&overrideEndpoint={{aws.sqs.overrideEndpoint}}"
+                + "&uriEndpointOverride={{aws.sqs.uriEndpointOverride}}")
+            .log("✅ Order shipped via SQS. Message ID: ${header.CamelAwsSqsMessageId}");
     }
 }

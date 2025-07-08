@@ -68,6 +68,20 @@
       <version>${camel.version}</version>
     </dependency>
 
+    <!-- ActiveMQ Artemis (Jakarta-compatible embedded broker) -->
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>artemis-jakarta-server</artifactId>
+      <version>2.31.2</version>
+    </dependency>
+
+    <!-- Optional: Spring Boot JMS Starter -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-activemq</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+
     <!-- Apache Camel Jackson (for .marshal().json(JsonLibrary.Jackson)) -->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
