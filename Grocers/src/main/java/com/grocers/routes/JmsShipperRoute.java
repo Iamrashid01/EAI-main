@@ -3,8 +3,8 @@ package com.grocers.routes;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
-@Component
-public class ShipperRoute extends RouteBuilder {
+@Component("jmsShipperRoute")
+public class JmsShipperRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {

@@ -1,7 +1,7 @@
 com\grocers\camel\ShipperRoute.class
-com\grocers\routes\ShipperRoute.class
 com\grocers\api\OrderController.class
 com\grocers\routes\OrderProcessingRoute.class
+com\grocers\routes\JmsShipperRoute.class
 com\grocers\SupplierAdapter.class
 com\grocers\routes\InventoryCheckRoute.class
 com\grocers\config\JmsConfig.class
@@ -10,8 +10,8 @@ com\grocers\routes\PaymentVerificationRoute.class
 com\grocers\adapters\XmlSupplierAdapter.class
 com\grocers\routes\SupplierBRoute.class
 com\grocers\GrocersApplication.class
+com\grocers\routes\RetailerConsolidationRoute.class
 com\grocers\routes\OrderStatusUpdateRoute.class
-com\grocers\routes\RetailerRoute.class
 com\grocers\camel\GlobalRouteConfig.class
 com\grocers\camel\CustomerRoute.class
 com\grocers\camel\RetailerRoute.class
