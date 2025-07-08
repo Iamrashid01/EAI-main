@@ -1,13 +1,8 @@
 #!/bin/bash
-# Create SQS queue
-aws sqs create-queue --queue-name grocer-orders
+echo "Creating SQS queue..."
+aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name grocer-orders
 
-# Configure IAM policy
-aws iam create-policy --policy-name grocer-sqs-access \
-  --policy-document file://sqs-policy.json
-
-# Get queue URL
-QUEUE_URL=$(aws sqs get-queue-url --queue-name grocer-orders --query QueueUrl --output text)
-
-# Update application properties
-echo "aws.sqs.queue=$QUEUE_URL" >> src/main/resources/application.properties
+echo "Updating application config..."
+echo "aws.sqs.queue=grocer-orders" >> src/main/resources/application.properties
+echo "aws.accessKey=test" >> src/main/resources/application.properties
+echo "aws.secretKey=test" >> src/main/resources/application.properties
