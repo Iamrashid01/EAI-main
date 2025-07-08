@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DeliveryService"
+    targetNamespace="http://localhost/deliveryService"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://localhost/deliveryService"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+        <xsd:schema targetNamespace="http://localhost/delivery/deliveryService">
+            <xsd:element name="getDeliveryStatusRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getDeliveryStatusResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateDeliveryStatusRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:string"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateDeliveryStatusResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="success" type="xsd:boolean"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getDeliveryStatusInput">
+        <part name="parameters" element="tns:getDeliveryStatusRequest"/>
+    </message>
+    <message name="getDeliveryStatusOutput">
+        <part name="parameters" element="tns:getDeliveryStatusResponse"/>
+    </message>
+    <message name="updateDeliveryStatusInput">
+        <part name="parameters" element="tns:updateDeliveryStatusRequest"/>
+    </message>
+    <message name="updateDeliveryStatusOutput">
+        <part name="parameters" element="tns:updateDeliveryStatusResponse"/>
+    </message>
+
+    <portType name="DeliveryServicePortType">
+        <operation name="getDeliveryStatus">
+            <input message="tns:getDeliveryStatusInput"/>
+            <output message="tns:getDeliveryStatusOutput"/>
+        </operation>
+        <operation name="updateDeliveryStatus">
+            <input message="tns:updateDeliveryStatusInput"/>
+            <output message="tns:updateDeliveryStatusOutput"/>
+        </operation>
+    </portType>
+
+    <binding name="DeliveryServiceBinding" type="tns:DeliveryServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getDeliveryStatus">
+            <soap:operation soapAction="http://localhost/deliveryService/getDeliveryStatus"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateDeliveryStatus">
+            <soap:operation soapAction="http://localhost/deliveryService/updateDeliveryStatus"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="DeliveryService">
+        <port name="DeliveryServicePort" binding="tns:DeliveryServiceBinding">
+            <soap:address location="http://localhost/deliveryService.php"/>
+        </port>
+    </service>
+</definitions> 

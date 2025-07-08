@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CustomerService"
+    targetNamespace="http://localhost/customerService"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://localhost/customerService"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+        <xsd:schema targetNamespace="http://localhost/customerService">
+            <xsd:element name="getOrderStatusRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getOrderStatusResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="xsd:string"/>
+                        <xsd:element name="deliveryStatus" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getOrderStatusInput">
+        <part name="parameters" element="tns:getOrderStatusRequest"/>
+    </message>
+    <message name="getOrderStatusOutput">
+        <part name="parameters" element="tns:getOrderStatusResponse"/>
+    </message>
+
+    <portType name="CustomerServicePortType">
+        <operation name="getOrderStatus">
+            <input message="tns:getOrderStatusInput"/>
+            <output message="tns:getOrderStatusOutput"/>
+        </operation>
+    </portType>
+
+    <binding name="CustomerServiceBinding" type="tns:CustomerServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getOrderStatus">
+            <soap:operation soapAction="http://localhost/customerService/getOrderStatus"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="CustomerService">
+        <port name="CustomerServicePort" binding="tns:CustomerServiceBinding">
+            <soap:address location="http://localhost/customerService.php"/>
+        </port>
+    </service>
+</definitions> 

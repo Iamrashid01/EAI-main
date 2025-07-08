@@ -1,0 +1,22 @@
+<dependencies>
+    <!-- AWS Integration -->
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws-sqs</artifactId>
+        <version>3.20.0</version>
+    </dependency>
+    
+    <!-- JSON Processing -->
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jackson</artifactId>
+        <version>3.20.0</version>
+    </dependency>
+    
+    <!-- XML Security -->
+    <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-xmlsecurity</artifactId>
+        <version>3.20.0</version>
+    </dependency>
+</dependencies>
