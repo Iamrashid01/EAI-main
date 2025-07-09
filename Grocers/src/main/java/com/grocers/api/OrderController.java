@@ -12,17 +12,31 @@ public class OrderController {
     @Autowired
     private ProducerTemplate producerTemplate;
 
-    // Sends order to the shipping route (SQS or internal processing)
-    @PostMapping
-    public String sendOrder(@RequestBody Order order) {
-        producerTemplate.sendBody("seda:shipping", order);
-        return "Order sent to shipping route.";
+    // JSON input
+    @PostMapping(value = "/jms", consumes = "application/json")
+    public String sendJsonOrder(@RequestBody Order order) {
+        producerTemplate.sendBodyAndHeader("jms:queue:customerOrders", order, "OrderId", order.getId());
+        return "JSON Order sent to customerOrders JMS queue.";
     }
 
-    // Sends order to the customerOrders JMS queue
-    @PostMapping("/jms")
-    public String sendToCustomerOrders(@RequestBody Order order) {
+    // CSV input
+    @PostMapping(value = "/csv", consumes = "text/plain")
+    public String sendCsvOrder(@RequestBody String csv) {
+        String[] parts = csv.split(",");
+        Order order = new Order();
+        order.setId(parts[0]);
+        order.setProduct(parts[1]);
+        order.setQuantity(Integer.parseInt(parts[2]));
+        order.setFormat(parts[3]);
+
         producerTemplate.sendBodyAndHeader("jms:queue:customerOrders", order, "OrderId", order.getId());
-        return "Order sent to customerOrders JMS queue.";
+        return "CSV Order sent to customerOrders JMS queue.";
+    }
+
+    // XML input
+    @PostMapping(value = "/xml", consumes = "application/xml")
+    public String sendXmlOrder(@RequestBody Order order) {
+        producerTemplate.sendBodyAndHeader("jms:queue:customerOrders", order, "OrderId", order.getId());
+        return "XML Order sent to customerOrders JMS queue.";
     }
 }

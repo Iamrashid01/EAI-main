@@ -10,93 +10,137 @@
   <packaging>jar</packaging>
 
   <name>Grocers Application</name>
-  <description>Spring Boot + Apache Camel + AWS SQS + JMS Integration</description>
+  <description>Spring Boot + Apache Camel + AWS SQS + JMS + SOAP Integration</description>
 
   <properties>
     <java.version>21</java.version>
     <spring.boot.version>3.2.5</spring.boot.version>
     <camel.version>4.4.0</camel.version>
+    <cxf.version>4.0.4</cxf.version>
   </properties>
 
   <dependencies>
-    <!-- Spring Boot Core -->
+    <!-- ✅ Spring Boot Core -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
       <version>${spring.boot.version}</version>
     </dependency>
 
-    <!-- Spring Boot Web (for REST APIs) -->
+    <!-- ✅ Spring Boot Web -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <version>${spring.boot.version}</version>
     </dependency>
 
-    <!-- Apache Camel Spring Boot Starter -->
+    <!-- ✅ Apache Camel Core -->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-spring-boot-starter</artifactId>
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- Apache Camel Core -->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-core-starter</artifactId>
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- Apache Camel Support (for MemoryIdempotentRepository) -->
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-support</artifactId>
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- Apache Camel AWS SQS -->
+    <!-- ✅ Camel AWS SQS -->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-aws2-sqs-starter</artifactId>
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- Apache Camel JMS -->
+    <!-- ✅ Camel JMS -->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-jms-starter</artifactId>
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- ActiveMQ Artemis (Jakarta-compatible embedded broker) -->
+    <!-- ✅ Camel HTTP (for REST/HTTP endpoints) -->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-http-starter</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+
+    <!-- ✅ ActiveMQ Artemis -->
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>artemis-jakarta-server</artifactId>
       <version>2.31.2</version>
     </dependency>
 
-    <!-- Optional: Spring Boot JMS Starter -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-activemq</artifactId>
       <version>${spring.boot.version}</version>
     </dependency>
 
-    <!-- Apache Camel Jackson (for .marshal().json(JsonLibrary.Jackson)) -->
+    <!-- ✅ Camel Jackson (for JSON) -->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-jackson-starter</artifactId>
       <version>${camel.version}</version>
     </dependency>
 
-    <!-- Jackson Core -->
+    <!-- ✅ Jackson Core -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.17.1</version>
     </dependency>
 
-    <!-- Lombok -->
+    <!-- ✅ JAXB (for XML) -->
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>4.0.4</version>
+    </dependency>
+
+    <!-- ✅ Apache CXF (for SOAP) -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+
+    <!-- ✅ Jakarta JWS & XML WS APIs -->
+    <dependency>
+      <groupId>jakarta.jws</groupId>
+      <artifactId>jakarta.jws-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.xml.ws</groupId>
+      <artifactId>jakarta.xml.ws-api</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+
+    <!-- ✅ Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -107,7 +151,6 @@
 
   <build>
     <plugins>
-      <!-- Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -119,7 +162,6 @@
         </configuration>
       </plugin>
 
-      <!-- Spring Boot Plugin -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

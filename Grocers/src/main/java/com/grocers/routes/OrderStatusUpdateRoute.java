@@ -1,5 +1,6 @@
 package com.grocers.routes;
 
+import com.grocers.domain.Order;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -15,8 +16,14 @@ public class OrderStatusUpdateRoute extends RouteBuilder {
             .process(new Processor() {
                 @Override
                 public void process(Exchange exchange) throws Exception {
-                    String orderId = exchange.getIn().getHeader("OrderId", String.class);
-                    exchange.getMessage().setBody("Order status updated for Order ID: " + (orderId != null ? orderId : "UNKNOWN"));
+                    Object body = exchange.getIn().getBody();
+                    if (body instanceof Order order) {
+                        exchange.getMessage().setBody("✅ Order status updated for Order ID: " + order.getId());
+                    } else if (body == null) {
+                        exchange.getMessage().setBody("⚠️ Received null message body");
+                    } else {
+                        exchange.getMessage().setBody("⚠️ Unexpected message type: " + body.getClass().getName());
+                    }
                 }
             })
             .log("${body}");
