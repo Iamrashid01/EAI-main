@@ -140,6 +140,13 @@
       <version>4.0.0</version>
     </dependency>
 
+    <!-- ✅ CXF Spring Boot Starter for SOAP -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+
     <!-- ✅ Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
