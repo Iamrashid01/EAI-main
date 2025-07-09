@@ -1,0 +1,12 @@
+# Legacy cleanup
+*.php
+*.sql
+
+# IDE folders
+.idea/
+*.log
+.DS_Store
+
+# Java build artifacts
+/target/
+*.class
