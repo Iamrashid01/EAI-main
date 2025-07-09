@@ -18,9 +18,10 @@ public class GlobalRouteConfig extends RouteBuilder {
             .retryAttemptedLogLevel(LoggingLevel.WARN));
 
         // Idempotent repository
-        IdempotentRepository idempotentRepo = MemoryIdempotentRepository.memoryIdempotentRepository(1000);
+        //IdempotentRepository idempotentRepo = MemoryIdempotentRepository.memoryIdempotentRepository(1000);
 
-        // JMS route: customerOrders
+        // ❌ Commented out to avoid duplicate consumption of customerOrders
+        /*
         from("jms:queue:customerOrders")
             .routeId("customer-orders-jms")
             .idempotentConsumer(
@@ -29,6 +30,7 @@ public class GlobalRouteConfig extends RouteBuilder {
             )
             .log("Received JMS order with ID: ${header.OrderId}")
             .to("direct:orderProcessing");
+        */
 
         // AWS SQS route: grocer-orders (LocalStack)
         from("aws2-sqs://grocer-orders"

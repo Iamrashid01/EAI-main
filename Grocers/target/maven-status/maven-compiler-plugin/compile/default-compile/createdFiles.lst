@@ -18,6 +18,7 @@ com\grocers\controller\FileUploadController.class
 com\grocers\routes\JmsShipperRoute.class
 com\grocers\SupplierAdapter.class
 com\grocers\routes\InventoryCheckRoute.class
+com\grocers\routes\CustomerOrderProcessingRoute.class
 com\grocers\routes\OrderStatusUpdateRoute$1.class
 com\grocers\routes\PaymentVerificationRoute.class
 com\grocers\routes\OrderStatusUpdateRoute.class

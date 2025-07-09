@@ -8,11 +8,14 @@ public class OrderProcessingRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        // ❌ Commented out to avoid duplicate consumption of customerOrders
+        /*
         from("jms:queue:customerOrders")
             .routeId("customer-orders-jms")
             .log("📦 Received JMS order with ID: ${body.id}")
             .to("jms:queue:inventoryCheck")
             .to("jms:queue:paymentVerification")
             .to("jms:queue:orderStatusUpdate");
+        */
     }
 }
