@@ -2,9 +2,9 @@
 
 This repository contains:
 
-* **Source Code** (Grocers Spring Boot & Apache Camel integration examples)
-* **Assignment Deliverables** (Presentation, Design Document PDFs)
-* **Scripts & Configurations** demonstrating: CSV/JSON/SOAP file upload, JMS routing, AWS integrations, database persistence.
+- **Source Code** (Grocers Spring Boot & Apache Camel integration examples)
+- **Assignment Deliverables** (Presentation, Design Document PDFs)
+- **Scripts & Configurations** demonstrating: CSV/JSON/SOAP file upload, JMS routing, AWS integrations, database persistence.
 
 ---
 
@@ -97,39 +97,39 @@ curl -X POST "https://localhost:8443/ws/OrderSoapEndpoint" \
 
 1. **Customer Interface**
 
-   * REST JSON (`/orders/jms`)
-   * CSV file upload (`/api/files/upload`)
-   * SOAP endpoint (`/ws/OrderSoapEndpoint`)
+   - REST JSON (`/orders/jms`)
+   - CSV file upload (`/api/files/upload`)
+   - SOAP endpoint (`/ws/OrderSoapEndpoint`)
 
 2. **Retailer Router**
 
-   * Camel `choice()` routes orders to supplier-specific JMS queues
-   * Content-based routing & aggregation patterns
+   - Camel `choice()` routes orders to supplier-specific JMS queues
+   - Content-based routing & aggregation patterns
 
 3. **Supplier Adapters**
 
-   * REST/HTTP and SOAP-based external calls
-   * Dynamic recipient lists for new suppliers
+   - REST/HTTP and SOAP-based external calls
+   - Dynamic recipient lists for new suppliers
 
 4. **Shipper Processor**
 
-   * Consumes from `shipperQueue`
-   * Sends status updates to `orderStatusUpdate` queue
+   - Consumes from `shipperQueue`
+   - Sends status updates to `orderStatusUpdate` queue
 
 ---
 
 ## Non‑Functional Considerations
 
-* **Scalability**: Horizontal scaling via JMS queues, AWS Lambda auto-scale
-* **Fault Tolerance**: Durable queues (JMS), Dead Letter Channels, transaction support
-* **Performance**: Asynchronous processing, connection pooling, streaming splitter
+- **Scalability**: Horizontal scaling via JMS queues, AWS Lambda auto-scale
+- **Fault Tolerance**: Durable queues (JMS), Dead Letter Channels, transaction support
+- **Performance**: Asynchronous processing, connection pooling, streaming splitter
 
 ---
 
 ## Deliverables
 
-* **Slide Deck**: `Grocers_EAI_Complete_WithSummary.pptx`
-* **Design Document (PDF)**: `EAI_Final_Design_Document.pdf`
+- **Slide Deck**: `Grocers_EAI_Complete_WithSummary.pptx`
+- **Design Document (PDF)**: `EAI_Final_Design_Document.pdf`
 
 ---
 
@@ -137,34 +137,33 @@ curl -X POST "https://localhost:8443/ws/OrderSoapEndpoint" \
 
 Feel free to update this README as you add:
 
-* Diagrams into the `docs/` folder
-* Screenshots in `docs/images/`
-* Additional code examples in `routes/` or `adapters/`
+- Diagrams into the `docs/` folder
+- Screenshots in `docs/images/`
+- Additional code examples in `routes/` or `adapters/`
 
 ---
 
+**Commands to be used for test** **CSV**
 
-
-
-**Commands to be used for test**
-**CSV**
-
+```bash
 curl.exe -X POST "https://localhost:8443/api/files/upload" `
   -H "Content-Type: multipart/form-data" `
   -F "file=@orders.csv" `
   -k
-
+```
 
 **JSON**
 
+```bash
 curl -X POST "https://localhost:8443/orders/jms" `
   -H "Content-Type: application/json" `
   -d '{"id":"ORD-701","product":"soap","quantity":4,"format":"json"}' `
   -k
-
+```
 
 **SOAP - XML**
 
+```bash
 curl -X POST "https://localhost:8443/ws/OrderSoapEndpoint" `
   -H "Content-Type: text/xml;charset=UTF-8" `
   -d "<soapenv:Envelope xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'>
@@ -181,21 +180,24 @@ curl -X POST "https://localhost:8443/ws/OrderSoapEndpoint" `
          </soapenv:Body>
       </soapenv:Envelope>" `
   -k
+```
 
+**Screenshots**
 
-**ScreenShots**
 **1 (CSV)**
-Logging output confirming CSV file ingestion and multipart parsing of order.csv. Orders extracted from the uploaded file were routed via Apache Camel and dispatched through the supplier queue, successfully activating the delivery flow and status update mechanisms. This validates full support for file-based input → JMS → Supplier → SQS → Status Update
-![alt text](image.png)
+
+Logging output confirming CSV file ingestion and multipart parsing of order.csv. Orders extracted from the uploaded file were routed via Apache Camel and dispatched through the supplier queue, successfully activating the delivery flow and status update mechanisms. This validates full support for file-based input → JMS → Supplier → SQS → Status Update\
+![CSV Flow Screenshot](image/image1.png)
 
 **2 (JSON)**
 
-Logging output confirming JSON order submission for ORD-701. The durable status queue and SQS dispatch paths were successfully triggered, demonstrating full integration of REST → JMS → Supplier → SQS → Status Update.
-![alt text](image-1.png)
+Logging output confirming JSON order submission for ORD-701. The durable status queue and SQS dispatch paths were successfully triggered, demonstrating full integration of REST → JMS → Supplier → SQS → Status Update.\
+![CSV Flow Screenshot](image/image2.png)
 
-**3 (SOAL – XML)**
-Logs confirming successful SOAP-based order submission for ORD-801. The integration flow routed the request from CXF endpoint through JMS and SQS, with persistent status tracking
-![alt text](image-2.png)
+**3 (SOAP – XML)**
 
+Logs confirming successful SOAP-based order submission for ORD-801. The integration flow routed the request from CXF endpoint through JMS and SQS, with persistent status tracking.\
+![CSV Flow Screenshot](image/image3.png)
 
 **Prepared by:** Rashid Ali Rabbani
+
